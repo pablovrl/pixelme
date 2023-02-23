@@ -96,69 +96,72 @@ export function PixelateImage() {
     addNewPixelatedImage(pixelatedImage.toURL());
     setIsPixelatedImageLoading(false);
   };
+
   return (
-    <div className="flex flex-col gap-4 w-full">
-      {pixelatedImage && areas.length > 0 && (
-        <div className="flex flex-col w-full">
-          <div>
-            {isPixelatedImageLoading ? (
-              <Spinner size={"w-8"} />
-            ) : (
-              <Alert>
-                <div>
-                  <span className="font-medium">Your image is ready!</span>{" "}
-                  Click this link to download it {"-> "}
-                  <a
-                    className="text-blue-400 underline"
-                    href={pixelatedImage}
-                    target="_blank"
-                  >
-                    Download your image.
-                  </a>
-                </div>
-              </Alert>
-            )}
+    <div className="flex" style={{ minHeight: "calc(100vh - 80px)" }}>
+      <div className="flex flex-col gap-4 w-full">
+        {pixelatedImage && areas.length > 0 && (
+          <div className="flex flex-col w-full">
+            <div>
+              {isPixelatedImageLoading ? (
+                <Spinner size={"w-8"} />
+              ) : (
+                <Alert>
+                  <div>
+                    <span className="font-medium">Your image is ready!</span>{" "}
+                    Click this link to download it {"-> "}
+                    <a
+                      className="text-blue-400 underline"
+                      href={pixelatedImage}
+                      target="_blank"
+                    >
+                      Download your image.
+                    </a>
+                  </div>
+                </Alert>
+              )}
+            </div>
+          </div>
+        )}
+        <div className="w-full flex gap-8">
+          <div className="w-full" style={{ maxWidth: MAX_WIDTH }}>
+            <AreaSelector areas={areas} onChange={onChangeHandler}>
+              <img
+                src={baseImage}
+                width={
+                  baseImageSize.width > MAX_WIDTH
+                    ? baseImageSize.width / imageMultiplier
+                    : baseImageSize.width
+                }
+              />
+            </AreaSelector>
+          </div>
+          <div className="flex flex-col gap-4 items-end">
+            <p className="w-full">
+              Select the areas you want to pixelate by clicking the image.
+            </p>
+            <button
+              onClick={handlePixelate}
+              className="hover:bg-green-500 py-4 rounded-2xl bg-green-500 text-white font-bold w-full"
+            >
+              pixelate
+            </button>
+            <button
+              onClick={resetAreas}
+              className="border-2 w-full py-4 rounded-2xl"
+            >
+              reset areas
+            </button>
+            <button
+              onClick={clearCurrentImage}
+              className="border-2 w-full py-4 rounded-2xl"
+            >
+              upload new image
+            </button>
           </div>
         </div>
-      )}
-      <div className="w-full flex gap-8">
-        <div className="w-full" style={{ maxWidth: MAX_WIDTH }}>
-          <AreaSelector areas={areas} onChange={onChangeHandler}>
-            <img
-              src={baseImage}
-              width={
-                baseImageSize.width > MAX_WIDTH
-                  ? baseImageSize.width / imageMultiplier
-                  : baseImageSize.width
-              }
-            />
-          </AreaSelector>
-        </div>
-        <div className="flex flex-col gap-4 items-end">
-          <p className="w-full">
-            Select the areas you want to pixelate by clicking the image.
-          </p>
-          <button
-            onClick={handlePixelate}
-            className="hover:bg-green-500 py-4 rounded-2xl bg-green-500 text-white font-bold w-full"
-          >
-            pixelate
-          </button>
-          <button
-            onClick={resetAreas}
-            className="border-2 w-full py-4 rounded-2xl"
-          >
-            reset areas
-          </button>
-          <button
-            onClick={clearCurrentImage}
-            className="border-2 w-full py-4 rounded-2xl"
-          >
-            upload new image
-          </button>
-        </div>
+        <YourImages />
       </div>
-      <YourImages />
     </div>
   );
 }
