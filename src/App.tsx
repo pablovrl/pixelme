@@ -81,10 +81,10 @@ function App() {
     });
 
     setPixelatedImage(pixelatedImage.toURL());
-    setPixelatedImages((prev) => [pixelatedImage.toURL(), ...prev]);
-
     await axios.get(pixelatedImage.toURL());
+
     setIsPixelatedImageLoading(false);
+    setPixelatedImages((prev) => [pixelatedImage.toURL(), ...prev]);
   };
 
   const resetAreas = () => {
