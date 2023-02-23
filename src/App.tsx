@@ -22,9 +22,6 @@ function App() {
 
   const onChangeHandler = (areas: IArea[]) => {
     setAreas(areas);
-  };
-
-  const handlePixelate = () => {
     const pixelatedImage = cloudinary.image(baseImageId);
     areas.forEach((area) => {
       pixelatedImage.effect(
@@ -68,22 +65,20 @@ function App() {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={handlePixelate}
-                className="border border-black w-full py-4 rounded-xl"
-              >
-                pixelate areas
-              </button>
-              <button
                 onClick={resetAreas}
                 className="border border-black w-full py-4 rounded-xl"
               >
                 reset pixelated areas
               </button>
             </div>
-            {pixelatedImage && (
+            {pixelatedImage && areas.length > 0 && (
               <div>
                 <p>Your image is ready, click the link to download it</p>
-                <a className="text-blue-400 underline" href={pixelatedImage} target="_blank">
+                <a
+                  className="text-blue-400 underline"
+                  href={pixelatedImage}
+                  target="_blank"
+                >
                   Download your image
                 </a>
               </div>
