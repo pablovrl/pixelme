@@ -11,10 +11,10 @@ export function YourImages() {
         {pixelatedImages.length === 0 && (
           <p className="text-gray-500">You haven't pixelated any images yet.</p>
         )}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-2">
           {pixelatedImages.map((image) => (
-            <a href={image} target="_blank" className="w-10 h-10">
-              <img src={image} />
+            <a href={image} target="_blank">
+              <img className="w-12 h-12 object-cover" src={image}/>
             </a>
           ))}
         </div>
