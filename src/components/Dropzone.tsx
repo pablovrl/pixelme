@@ -62,7 +62,12 @@ export function Dropzone() {
     updateBaseImageStatus("loaded");
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      image: [".png", ".jpg", ".jpeg", ".webp"],
+    },
+  });
 
   return (
     <div className="w-full flex flex-col gap-8">
