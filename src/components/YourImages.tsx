@@ -13,7 +13,7 @@ export function YourImages() {
         )}
         <div className="flex flex-wrap gap-2">
           {pixelatedImages.map((image) => (
-            <a href={image} target="_blank">
+            <a key={image} href={image} target="_blank">
               <img className="w-12 h-12 object-cover" src={image}/>
             </a>
           ))}

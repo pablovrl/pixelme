@@ -13,7 +13,7 @@ import { YourImages } from "./YourImages";
 
 const cloudinary = new Cloudinary({
   cloud: {
-    cloudName: "drd5r8jrf",
+    cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
   },
 });
 
@@ -32,6 +32,8 @@ export function PixelateImage() {
   const [areas, setAreas] = useState<IArea[]>([]);
   const [pixelatedImage, setPixelatedImage] = useState<string | null>(null);
   const [imageMultiplier, setImageMultiplier] = useState(1);
+
+  console.log();
 
   useEffect(() => {
     for (let i = 1; i < 10; i = i + 0.1) {

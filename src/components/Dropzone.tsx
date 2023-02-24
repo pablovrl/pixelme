@@ -2,11 +2,10 @@ import axios from "axios";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useBaseImageStore } from "../store/baseImageStore";
-import midu from "../assets/midu.jpeg";
 
 const URL = "https://api.cloudinary.com/v1_1/drd5r8jrf/image/upload";
-const API_KEY = "361692725249647";
-const UPLOAD_PRESET = "y23xo48p";
+const API_KEY = import.meta.env.VITE_CLOUDINARY_API_KEY;
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
 interface IDefaultImage {
   id: string;
@@ -89,7 +88,11 @@ export function Dropzone() {
           <p>Select one of these:</p>
         </div>
         {defaultImages.map((image) => (
-          <button className="hover:scale-110 transition-transform duration-150" onClick={() => uploadDefaultImage(image)}>
+          <button
+            key={image.id}
+            className="hover:scale-110 transition-transform duration-150"
+            onClick={() => uploadDefaultImage(image)}
+          >
             <img src={image.url} className="h-12 rounded-xl" />
           </button>
         ))}
